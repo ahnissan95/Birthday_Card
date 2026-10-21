@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#170d35">
+  <title>Happy Birthday 🎂</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #48206c, #170d35 65%);
+      color: white;
+      text-align: center;
+    }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .container {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 35px 18px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 18px;
+      border: 1px solid #ffffff50;
+      border-radius: 50px;
+      background: #ffffff12;
+      color: #ffd9f5;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      animation: fadeIn 1s ease both;
+    }
+
+    h1 {
+      margin-top: 22px;
+      font-size: clamp(2.4rem, 9vw, 5.5rem);
+      line-height: 1.15;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffb4e6, #fff5b8, #c9b6ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 22px #e78aff50);
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .name {
+      color: #ffcae9;
+      text-shadow: 0 0 25px #ff65d6;
+    }
+
+    .subtitle {
+      max-width: 440px;
+      margin: 20px auto 0;
+      color: #e3d7f5;
+      font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+      line-height: 1.8;
+      animation: fadeIn 1.5s ease both;
+    }
+
+    .cake {
+      font-size: clamp(5rem, 20vw, 8rem);
+      margin: 22px 0 10px;
+      filter: drop-shadow(0 0 25px #ff81df55);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .wish-card {
+      width: min(100%, 460px);
+      padding: 23px 20px;
+      margin-top: 12px;
+      border-radius: 22px;
+      background: #ffffff0d;
+      border: 1px solid #ffffff24;
+      box-shadow: 0 15px 50px #00000020;
+      backdrop-filter: blur(12px);
+    }
+
+    .wish-card p {
+      color: #f4e9ff;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    button {
+      border: none;
+      border-radius: 50px;
+      padding: 14px 23px;
+      min-height: 48px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .primary {
+      color: #321343;
+      background: linear-gradient(135deg, #ffb3e5, #ffe6a3);
+      box-shadow: 0 6px 25px #ff88d544;
+    }
+
+    .secondary {
+      color: white;
+      background: #ffffff12;
+      border: 1px solid #ffffff45;
+    }
+
+    #message {
+      margin-top: 18px;
+      min-height: 28px;
+      color: #ffdcf3;
+      font-weight: 600;
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -150px;
+      font-size: 42px;
+      z-index: -1;
+      opacity: 0.7;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+    }
+
+    .b1 { left: 5%; animation-duration: 13s; }
+    .b2 { left: 23%; animation-duration: 17s; animation-delay: 3s; }
+    .b3 { right: 8%; animation-duration: 14s; animation-delay: 1s; }
+    .b4 { right: 25%; animation-duration: 18s; animation-delay: 5s; }
+
+    footer {
+      margin-top: 35px;
+      color: #bdaed4;
+      font-size: 0.8rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(-8deg); }
+      100% { transform: translateY(-125vh) rotate(15deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 30px 16px; }
+      .wish-card { padding: 20px 16px; }
+      .buttons { width: 100%; }
+      button { flex: 1 1 145px; }
+      footer { margin-top: 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <div class="balloon b1">🎈</div>
+  <div class="balloon b2">🎈</div>
+  <div class="balloon b3">🎈</div>
+  <div class="balloon b4">🎈</div>
+
+  <main class="container">
+    <div class="badge">✨ A SPECIAL DAY ✨</div>
+
+    <!-- Change the name below -->
+    <h1>
+      Happy Birthday<br>
+      <span class="name" id="birthdayName">Tamannaa!</span>
+    </h1>
+
+    <p class="subtitle">
+      Today is all about you! 💖<br>
+      May your day be filled with love, laughter,
+      happiness, and unforgettable memories.
+    </p>
+
+    <div class="cake" aria-label="Birthday cake">🎂</div>
+
+    <section class="wish-card">
+      <p>
+        🌸 May every dream in your heart come true.<br>
+        🌟 May every new day bring you closer to success.<br>
+        💕 Keep smiling and shining just the way you are!
+      </p>
+    </section>
+
+    <div class="buttons">
+      <button class="primary" id="celebrateBtn">
+        🎉 Celebrate!
+      </button>
+      <button class="secondary" id="wishBtn">
+        💌 A Special Wish
+      </button>
+    </div>
+
+    <p id="message" aria-live="polite"></p>
+
+    <footer>
+      Made with 💖 just for you
+    </footer>
+  </main>
+
+  <script>
+    // ===== CONFETTI ANIMATION =====
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    let pieces = [];
+    let animationId = null;
+    let width = 0;
+    let height = 0;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const colors = [
+      "#ff5ca8", "#ffd166", "#7cf7d4",
+      "#a78bfa", "#ffffff", "#ff884d",
+      "#75d7ff"
+    ];
+
+    function burst(count = 180) {
+      const originX = width / 2;
+      const originY = height * 0.38;
+
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 7;
+
+        pieces.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 3,
+          size: 4 + Math.random() * 7,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          spin: (Math.random() - 0.5) * 12,
+          gravity: 0.12 + Math.random() * 0.08,
+          life: 100 + Math.random() * 70
+        });
+      }
+
+      if (!animationId) animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, width, height);
+
+      pieces = pieces.filter(p => p.life > 0 && p.y < height + 30);
+
+      for (const p of pieces) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.vx *= 0.99;
+        p.rotation += p.spin;
+        p.life--;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.globalAlpha = Math.min(1, p.life / 25);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+        ctx.restore();
+      }
+
+      if (pieces.length) {
+        animationId = requestAnimationFrame(animateConfetti);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        animationId = null;
+      }
+    }
+
+    // Initial birthday celebration
+    window.addEventListener("load", () => {
+      setTimeout(() => burst(120), 400);
+    });
+
+    document.getElementById("celebrateBtn").addEventListener("click", () => {
+      burst(window.innerWidth < 600 ? 130 : 240);
+      document.getElementById("message").textContent =
+        "🎊 Yay! Let the birthday magic begin! 🎊";
+    });
+
+    document.getElementById("wishBtn").addEventListener("click", () => {
+      document.getElementById("message").textContent =
+        "💖 May this new year of your life bring you endless happiness, success, and beautiful memories. Keep smiling and enjoy your special day. Happy Birthday! 🎂✨";
+      burst(100);
+    });
+  </script>
+</body>
+</html>
